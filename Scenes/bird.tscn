@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://b688rc3pxjuh1"]
+
+[ext_resource type="Script" uid="uid://dpy4q0n8k6oaj" path="res://Scripts/bird.gd" id="1_dnvpi"]
+[ext_resource type="Texture2D" uid="uid://dxh6u3ycbfni0" path="res://Assets/stickbird_frame_1_256x256.png" id="1_mcegt"]
+[ext_resource type="Texture2D" uid="uid://dj6wh8ba8wdpc" path="res://Assets/stickbird_frame_2_256x256.png" id="2_dnvpi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vl8r2"]
+size = Vector2(214, 63.333332)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rr33m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mcegt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_dnvpi")
+}],
+"loop": true,
+"name": &"flap_wings",
+"speed": 5.0
+}]
+
+[node name="Bird" type="CharacterBody2D" groups=["Bird"]]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_dnvpi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(21, 21.666666)
+shape = SubResource("RectangleShape2D_vl8r2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rr33m")
+animation = &"flap_wings"
+frame = 1
+frame_progress = 0.45862913
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

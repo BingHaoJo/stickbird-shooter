@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqy4abfo14jy1"]
+
+[ext_resource type="Texture2D" uid="uid://cp8sl33ehb2jm" path="res://Assets/grassy_blue_sky_with_fence_bg_512x256.png" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://djdiwjipjgmn3" path="res://Scenes/player.tscn" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://bu24h0u7iag7s" path="res://Scripts/spawn_manager.gd" id="3_8gbba"]
+
+[node name="Main" type="Node2D"]
+
+[node name="GrassyBlueSkyWithFenceBg512x256" type="Sprite2D" parent="."]
+position = Vector2(575, 325)
+scale = Vector2(2.2460938, 2.5234375)
+texture = ExtResource("1_ig7tw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 325)
+
+[node name="Player" parent="." instance=ExtResource("2_bo1nx")]
+position = Vector2(80, 366)
+scale = Vector2(1.5, 1.5)
+
+[node name="SpawnMarkerStart" type="Marker2D" parent="."]
+position = Vector2(1185, 42)
+
+[node name="SpawnMarkerEnd" type="Marker2D" parent="."]
+position = Vector2(1185, 514)
+
+[node name="SpawnManager" type="Node" parent="."]
+script = ExtResource("3_8gbba")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="SpawnTimer" to="SpawnManager" method="_on_spawn_timer_timeout"]

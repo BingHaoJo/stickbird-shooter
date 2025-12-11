@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://djdiwjipjgmn3"]
+
+[ext_resource type="Script" uid="uid://beyoousuttvaa" path="res://Scripts/player.gd" id="1_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://bk3dw280ou2r" path="res://Assets/stickguy_without_gunhand 256x256.png" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://cpvngarplgl4b" path="res://Assets/stick_gunhand_256x256.png" id="2_6t5aa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vgqql"]
+size = Vector2(71, 217)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_6t5aa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6.5, 19.5)
+shape = SubResource("RectangleShape2D_vgqql")
+
+[node name="player_mesh" type="Sprite2D" parent="."]
+texture = ExtResource("1_cvnsp")
+
+[node name="gun_hand" type="Sprite2D" parent="."]
+position = Vector2(-2, -28)
+texture = ExtResource("2_6t5aa")
+offset = Vector2(30, 5)
+
+[node name="gun_barrel" type="RayCast2D" parent="gun_hand"]
+position = Vector2(84, 0)
+target_position = Vector2(15, 0)
