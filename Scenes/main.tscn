@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqy4abfo14jy1"]
+[gd_scene load_steps=6 format=3 uid="uid://bqy4abfo14jy1"]
 
 [ext_resource type="Texture2D" uid="uid://cp8sl33ehb2jm" path="res://Assets/grassy_blue_sky_with_fence_bg_512x256.png" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://djdiwjipjgmn3" path="res://Scenes/player.tscn" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://bu24h0u7iag7s" path="res://Scripts/spawn_manager.gd" id="3_8gbba"]
+[ext_resource type="Script" uid="uid://d31np43k0mbxd" path="res://Scripts/points_manager.gd" id="4_jjvhh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jjvhh"]
+font_size = 60
+font_color = Color(0.8012637, 1.540184e-06, 6.738305e-07, 1)
 
 [node name="Main" type="Node2D"]
 
@@ -18,15 +23,31 @@ position = Vector2(575, 325)
 position = Vector2(80, 366)
 scale = Vector2(1.5, 1.5)
 
-[node name="SpawnMarkerStart" type="Marker2D" parent="."]
-position = Vector2(1185, 42)
-
-[node name="SpawnMarkerEnd" type="Marker2D" parent="."]
-position = Vector2(1185, 514)
-
 [node name="SpawnManager" type="Node" parent="."]
 script = ExtResource("3_8gbba")
 
+[node name="PointsManager" type="Node" parent="."]
+script = ExtResource("4_jjvhh")
+
 [node name="SpawnTimer" type="Timer" parent="."]
 
+[node name="SpawnMarkers" type="Node" parent="."]
+
+[node name="SpawnMarkerEnd" type="Marker2D" parent="SpawnMarkers"]
+position = Vector2(1185, 514)
+
+[node name="SpawnMarkerStart" type="Marker2D" parent="SpawnMarkers"]
+position = Vector2(1185, 42)
+
+[node name="PointCounter" type="Label" parent="."]
+offset_left = 70.0
+offset_top = 142.0
+offset_right = 110.0
+offset_bottom = 238.0
+text = "0"
+label_settings = SubResource("LabelSettings_jjvhh")
+
+[node name="BirdSpawnPlace" type="Node" parent="."]
+
 [connection signal="timeout" from="SpawnTimer" to="SpawnManager" method="_on_spawn_timer_timeout"]
+[connection signal="child_exiting_tree" from="BirdSpawnPlace" to="PointsManager" method="_on_bird_spawn_place_child_exiting_tree"]

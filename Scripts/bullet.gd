@@ -2,15 +2,16 @@ class_name BulletController
 extends Node2D
 
 
-@export var SPEED = 1000.0
+@export var SPEED = 20
 @export var direction: float = 1
 
 func _process(delta: float) -> void:
-	position += transform.x * SPEED * delta
+	# Bullet moving
+	position += transform.x * (SPEED*100) * delta
 
 
 func _on_destroy_timer_timeout() -> void:
-	print("bullet destroyed")
+	print("bullet destroyed") # When bullet not hit anything, destroy itself
 	queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://ceniurq2cvpk5"]
+
+[ext_resource type="Script" uid="uid://boyevnb5h60j8" path="res://Scripts/+1_point.gd" id="1_iqjfn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kjqo1"]
+font_size = 70
+font_color = Color(1, 1, 0, 1)
+
+[node name="+1_point" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iqjfn")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "+1"
+label_settings = SubResource("LabelSettings_kjqo1")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]
