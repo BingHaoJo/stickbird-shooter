@@ -25,6 +25,7 @@ func _physics_process(_delta: float) -> void:
 	
 func SpawnBullet():
 	var bullet_instance = bullet.instantiate()
+	$GunShotPlayer.play()
 	bullet_instance.position = gun_barrel.global_position
 	bullet_instance.rotation = gun_barrel.global_rotation
 	get_tree().root.add_child(bullet_instance)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://djdiwjipjgmn3"]
+[gd_scene load_steps=6 format=3 uid="uid://djdiwjipjgmn3"]
 
 [ext_resource type="Script" uid="uid://beyoousuttvaa" path="res://Scripts/player.gd" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://bk3dw280ou2r" path="res://Assets/stickguy_without_gunhand 256x256.png" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cpvngarplgl4b" path="res://Assets/stick_gunhand_256x256.png" id="2_6t5aa"]
+[ext_resource type="AudioStream" uid="uid://b1ohfyomhej0n" path="res://Audio/Gun_Shot_Stereo_48000Hz.wav" id="4_vgqql"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vgqql"]
 size = Vector2(71, 217)
@@ -27,3 +28,7 @@ offset = Vector2(30, 5)
 [node name="gun_barrel" type="RayCast2D" parent="gun_hand"]
 position = Vector2(84, 0)
 target_position = Vector2(15, 0)
+
+[node name="GunShotPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_vgqql")
+volume_db = -15.0
