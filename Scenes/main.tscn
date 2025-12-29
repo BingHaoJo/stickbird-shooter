@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqy4abfo14jy1"]
+[gd_scene load_steps=14 format=3 uid="uid://bqy4abfo14jy1"]
 
 [ext_resource type="Texture2D" uid="uid://cp8sl33ehb2jm" path="res://Assets/grassy_blue_sky_with_fence_bg_512x256.png" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://djdiwjipjgmn3" path="res://Scenes/player.tscn" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://bu24h0u7iag7s" path="res://Scripts/spawn_manager.gd" id="3_8gbba"]
 [ext_resource type="Script" uid="uid://d31np43k0mbxd" path="res://Scripts/points_manager.gd" id="4_jjvhh"]
 [ext_resource type="AudioStream" uid="uid://bnw4fqrudtxgt" path="res://Audio/Ding_SFX_Stereo_48000Hz.wav" id="5_kry3j"]
+[ext_resource type="Script" uid="uid://dbyvi7fssgjra" path="res://Scripts/damage_zone.gd" id="6_21xkr"]
+[ext_resource type="Script" uid="uid://vevu0reyv0av" path="res://Scripts/tutorial_menu.gd" id="7_6bp64"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jjvhh"]
 font_size = 60
@@ -13,6 +15,18 @@ font_color = Color(0.8012637, 1.540184e-06, 6.738305e-07, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_kry3j"]
 font_size = 60
 font_color = Color(0.52156866, 0, 0.9764706, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21xkr"]
+size = Vector2(64, 654)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_344ge"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ynf5e"]
+material = SubResource("StandardMaterial3D_344ge")
+
+[sub_resource type="LabelSettings" id="LabelSettings_hptm8"]
+font_size = 30
+font_color = Color(1, 1, 0, 1)
 
 [node name="Main" type="Node2D"]
 
@@ -69,6 +83,55 @@ current = true
 [node name="DingPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_kry3j")
 
+[node name="DamageZone" type="Area2D" parent="."]
+position = Vector2(-24, 310)
+script = ExtResource("6_21xkr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone"]
+shape = SubResource("RectangleShape2D_21xkr")
+
+[node name="TutorialMenu" type="Control" parent="."]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1150.0
+offset_bottom = 650.0
+script = ExtResource("7_6bp64")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="TutorialMenu"]
+modulate = Color(0.043137256, 0.05490196, 0, 0.63529414)
+position = Vector2(581.375, 289)
+scale = Vector2(751.25, 370.00003)
+mesh = SubResource("QuadMesh_ynf5e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TutorialMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.18100001
+anchor_top = 0.15200001
+anchor_right = 0.832
+anchor_bottom = 0.80600005
+offset_left = -0.15000916
+offset_top = 0.19999695
+offset_right = 0.19995117
+offset_bottom = 0.099975586
+alignment = 1
+
+[node name="Label" type="Label" parent="TutorialMenu/VBoxContainer"]
+layout_mode = 2
+text = "Move your mouse to the birds and 
+press left click on the mouse to shoot. 
+Get as much points you can."
+label_settings = SubResource("LabelSettings_hptm8")
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="Button" type="Button" parent="TutorialMenu/VBoxContainer"]
+layout_mode = 2
+text = "OK"
+
 [connection signal="milestine_hit" from="PointsManager" to="SpawnManager" method="_on_points_manager_milestine_hit"]
 [connection signal="timeout" from="SpawnTimer" to="SpawnManager" method="_on_spawn_timer_timeout"]
 [connection signal="child_exiting_tree" from="BirdSpawnPlace" to="PointsManager" method="_on_bird_spawn_place_child_exiting_tree"]
+[connection signal="body_entered" from="DamageZone" to="DamageZone" method="_on_body_entered"]
+[connection signal="pressed" from="TutorialMenu/VBoxContainer/Button" to="TutorialMenu" method="_on_button_pressed"]

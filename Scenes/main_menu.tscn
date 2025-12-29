@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://b02rgrmiw3pa7"]
+[gd_scene load_steps=9 format=3 uid="uid://b02rgrmiw3pa7"]
 
 [ext_resource type="Texture2D" uid="uid://cp8sl33ehb2jm" path="res://Assets/grassy_blue_sky_with_fence_bg_512x256.png" id="1_28flt"]
 [ext_resource type="Texture2D" uid="uid://byelxmu3o3jn4" path="res://Assets/crowhunt_title_512x256.png" id="2_ce3w2"]
-[ext_resource type="Script" uid="uid://bsepxsymj61a3" path="res://Scenes/play_button.gd" id="3_n45e2"]
+[ext_resource type="Script" uid="uid://bsepxsymj61a3" path="res://Scripts/play_button.gd" id="3_n45e2"]
 [ext_resource type="Texture2D" uid="uid://d2d1pp2w3v7ax" path="res://Assets/play_button_512x256.png" id="4_opfnp"]
 [ext_resource type="Texture2D" uid="uid://dxi1s7ksim08b" path="res://Assets/pressed_play_button_512x256.png" id="5_n45e2"]
 [ext_resource type="AudioStream" uid="uid://bnw4fqrudtxgt" path="res://Audio/Ding_SFX_Stereo_48000Hz.wav" id="6_opfnp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_opfnp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_opfnp"]
 animations = [{
@@ -44,7 +46,9 @@ offset_bottom = 406.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4.960001, 3.32)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_opfnp")
 action_mode = 0
+flat = true
 script = ExtResource("3_n45e2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayButton"]

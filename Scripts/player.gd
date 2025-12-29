@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var min_hand_rotation: float = -67.0
 @export var max_hand_rotation: float = 81
 @export var shoot_cooldown: float = 0.3
+@export var health_amount: float = 100.0
 
 @onready var gun_hand: Sprite2D = $gun_hand
 @onready var gun_barrel: RayCast2D = $gun_hand/gun_barrel
@@ -12,6 +13,7 @@ var bullet = preload("res://Scenes/bullet.tscn")
 var canShoot: bool = true
 
 func _ready() -> void:
+	$HealthBar.value = health_amount
 	$GunLoadPlayer.play()
 
 func _physics_process(_delta: float) -> void:
@@ -37,3 +39,7 @@ func ShootCooldown():
 	canShoot = false
 	await get_tree().create_timer(shoot_cooldown).timeout
 	canShoot = true
+
+func Hurt(damage_point):
+	health_amount -= damage_point
+	$HealthBar.value = health_amount
