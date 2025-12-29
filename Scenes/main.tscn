@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqy4abfo14jy1"]
+[gd_scene load_steps=8 format=3 uid="uid://bqy4abfo14jy1"]
 
 [ext_resource type="Texture2D" uid="uid://cp8sl33ehb2jm" path="res://Assets/grassy_blue_sky_with_fence_bg_512x256.png" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://djdiwjipjgmn3" path="res://Scenes/player.tscn" id="2_bo1nx"]
@@ -9,6 +9,10 @@
 [sub_resource type="LabelSettings" id="LabelSettings_jjvhh"]
 font_size = 60
 font_color = Color(0.8012637, 1.540184e-06, 6.738305e-07, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kry3j"]
+font_size = 60
+font_color = Color(0.52156866, 0, 0.9764706, 1)
 
 [node name="Main" type="Node2D"]
 
@@ -41,12 +45,20 @@ position = Vector2(1185, 514)
 position = Vector2(1185, 42)
 
 [node name="PointCounter" type="Label" parent="."]
-offset_left = 70.0
-offset_top = 142.0
-offset_right = 110.0
-offset_bottom = 238.0
+offset_left = 268.0
+offset_top = 553.0
+offset_right = 308.0
+offset_bottom = 649.0
 text = "0"
 label_settings = SubResource("LabelSettings_jjvhh")
+
+[node name="LevelCounter" type="Label" parent="."]
+offset_left = 268.0
+offset_top = 493.0
+offset_right = 308.0
+offset_bottom = 589.0
+text = "0"
+label_settings = SubResource("LabelSettings_kry3j")
 
 [node name="BirdSpawnPlace" type="Node" parent="."]
 
@@ -57,5 +69,6 @@ current = true
 [node name="DingPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_kry3j")
 
+[connection signal="milestine_hit" from="PointsManager" to="SpawnManager" method="_on_points_manager_milestine_hit"]
 [connection signal="timeout" from="SpawnTimer" to="SpawnManager" method="_on_spawn_timer_timeout"]
 [connection signal="child_exiting_tree" from="BirdSpawnPlace" to="PointsManager" method="_on_bird_spawn_place_child_exiting_tree"]

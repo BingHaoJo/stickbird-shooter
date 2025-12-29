@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://djdiwjipjgmn3"]
+[gd_scene load_steps=8 format=3 uid="uid://djdiwjipjgmn3"]
 
 [ext_resource type="Script" uid="uid://beyoousuttvaa" path="res://Scripts/player.gd" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://bk3dw280ou2r" path="res://Assets/stickguy_without_gunhand 256x256.png" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cpvngarplgl4b" path="res://Assets/stick_gunhand_256x256.png" id="2_6t5aa"]
 [ext_resource type="AudioStream" uid="uid://b1ohfyomhej0n" path="res://Audio/Gun_Shot_Stereo_48000Hz.wav" id="4_vgqql"]
+[ext_resource type="AudioStream" uid="uid://dr4kcis5gnfwv" path="res://Audio/Gun_Reload_Stereo_48000Hz.wav" id="5_fkybt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vgqql"]
 size = Vector2(71, 217)
+
+[sub_resource type="QuadMesh" id="QuadMesh_x3wgy"]
+size = Vector2(200, 20)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 0
@@ -21,14 +25,28 @@ shape = SubResource("RectangleShape2D_vgqql")
 texture = ExtResource("1_cvnsp")
 
 [node name="gun_hand" type="Sprite2D" parent="."]
-position = Vector2(-2, -28)
+position = Vector2(-2, -17)
 texture = ExtResource("2_6t5aa")
-offset = Vector2(30, 5)
+offset = Vector2(30, -5)
 
 [node name="gun_barrel" type="RayCast2D" parent="gun_hand"]
-position = Vector2(84, 0)
+position = Vector2(84, -10)
 target_position = Vector2(15, 0)
 
 [node name="GunShotPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_vgqql")
 volume_db = -15.0
+
+[node name="GunLoadPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fkybt")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = 56.0
+offset_top = -115.0
+offset_right = 60.0
+offset_bottom = -88.0
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="ProgressBar"]
+modulate = Color(0.05490196, 1, 0, 1)
+mesh = SubResource("QuadMesh_x3wgy")

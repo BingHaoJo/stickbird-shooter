@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dj6wh8ba8wdpc" path="res://Assets/stickbird_frame_2_256x256.png" id="2_dnvpi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vl8r2"]
-size = Vector2(214, 63.333332)
+size = Vector2(214, 91.33333)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rr33m"]
 animations = [{
@@ -23,10 +23,11 @@ animations = [{
 
 [node name="Bird" type="CharacterBody2D" groups=["Bird"]]
 scale = Vector2(0.5, 0.5)
+collision_mask = 2
 script = ExtResource("1_dnvpi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(21, 21.666666)
+position = Vector2(21, 7.666667)
 shape = SubResource("RectangleShape2D_vl8r2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

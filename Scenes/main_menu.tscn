@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://b02rgrmiw3pa7"]
+[gd_scene load_steps=8 format=3 uid="uid://b02rgrmiw3pa7"]
 
 [ext_resource type="Texture2D" uid="uid://cp8sl33ehb2jm" path="res://Assets/grassy_blue_sky_with_fence_bg_512x256.png" id="1_28flt"]
+[ext_resource type="Texture2D" uid="uid://byelxmu3o3jn4" path="res://Assets/crowhunt_title_512x256.png" id="2_ce3w2"]
+[ext_resource type="Script" uid="uid://bsepxsymj61a3" path="res://Scenes/play_button.gd" id="3_n45e2"]
+[ext_resource type="Texture2D" uid="uid://d2d1pp2w3v7ax" path="res://Assets/play_button_512x256.png" id="4_opfnp"]
+[ext_resource type="Texture2D" uid="uid://dxi1s7ksim08b" path="res://Assets/pressed_play_button_512x256.png" id="5_n45e2"]
+[ext_resource type="AudioStream" uid="uid://bnw4fqrudtxgt" path="res://Audio/Ding_SFX_Stereo_48000Hz.wav" id="6_opfnp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_opfnp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_opfnp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_n45e2")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="MainMenu" type="Node2D"]
 
@@ -9,15 +28,33 @@ position = Vector2(575, 325)
 scale = Vector2(2.2460938, 2.5234375)
 texture = ExtResource("1_28flt")
 
-[node name="Button" type="Button" parent="."]
+[node name="CrowhuntTitle512x256" type="Sprite2D" parent="."]
+position = Vector2(568, 176)
+scale = Vector2(2, 2)
+texture = ExtResource("2_ce3w2")
+
+[node name="PlayButton" type="Button" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 511.0
-offset_top = 389.0
-offset_right = 558.0
-offset_bottom = 420.0
+offset_left = 453.0
+offset_top = 375.0
+offset_right = 500.0
+offset_bottom = 406.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
-flat = true
+scale = Vector2(4.960001, 3.32)
+action_mode = 0
+script = ExtResource("3_n45e2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayButton"]
+position = Vector2(23.992004, 15.9640045)
+scale = Vector2(0.302, 0.452)
+sprite_frames = SubResource("SpriteFrames_opfnp")
+
+[node name="DingPlayer" type="AudioStreamPlayer2D" parent="PlayButton"]
+position = Vector2(-91.33063, -112.95181)
+scale = Vector2(0.20161286, 0.30120483)
+stream = ExtResource("6_opfnp")
+
+[connection signal="pressed" from="PlayButton" to="PlayButton" method="_on_pressed"]

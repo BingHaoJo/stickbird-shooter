@@ -11,6 +11,9 @@ extends CharacterBody2D
 var bullet = preload("res://Scenes/bullet.tscn")
 var canShoot: bool = true
 
+func _ready() -> void:
+	$GunLoadPlayer.play()
+
 func _physics_process(_delta: float) -> void:
 	# Track mouse and aiming
 	var mouse_pos = get_global_mouse_position()
