@@ -11,10 +11,11 @@ func _process(delta: float) -> void:
 
 
 func _on_destroy_timer_timeout() -> void:
-	print("bullet destroyed") # When bullet not hit anything, destroy itself
+	# When bullet not hit anything, destroy itself
 	queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	# Kill bird on bullet hit
 	if body.is_in_group("Bird"):
 		body.isDead = true
 		queue_free()

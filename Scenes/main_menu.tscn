@@ -19,7 +19,7 @@ animations = [{
 "texture": ExtResource("5_n45e2")
 }],
 "loop": false,
-"name": &"default",
+"name": &"play_button",
 "speed": 5.0
 }]
 
@@ -55,6 +55,7 @@ script = ExtResource("3_n45e2")
 position = Vector2(23.992004, 15.9640045)
 scale = Vector2(0.302, 0.452)
 sprite_frames = SubResource("SpriteFrames_opfnp")
+animation = &"play_button"
 
 [node name="DingPlayer" type="AudioStreamPlayer2D" parent="PlayButton"]
 position = Vector2(-91.33063, -112.95181)

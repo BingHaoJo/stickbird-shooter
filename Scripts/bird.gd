@@ -37,5 +37,5 @@ func SpawnPointsMesh():
 	get_tree().root.add_child(points_instance)
 
 func _on_destroy_timer_timeout() -> void:
-	print("bird passed")
+	# Destroy bird that passed player
 	queue_free()
